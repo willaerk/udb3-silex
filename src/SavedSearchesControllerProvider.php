@@ -76,7 +76,7 @@ class SavedSearchesControllerProvider implements ControllerProviderInterface
     private function getUserIDFromApp(Application $app)
     {
         /* @var \CultureFeed_User $user */
-        $user = $app['current_user'];
+        $user = $app['uitid_user'];
         return new String($user->id);
     }
 

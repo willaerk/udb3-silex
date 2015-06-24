@@ -24,7 +24,7 @@ class SavedSearchesServiceProvider implements ServiceProviderInterface
             function ($app) {
                 $consumer = new Consumer(
                     $app['config']['uitid']['base_url'],
-                    $app['uitid_consumer_credentials']
+                    $app['culturefeed_consumer_credentials']
                 );
 
                 return new SavedSearchesServiceFactory(
@@ -58,7 +58,7 @@ class SavedSearchesServiceProvider implements ServiceProviderInterface
             $UiTIDRepository = new UiTIDSavedSearchRepository($app['saved_searches']);
             $UiTIDRepository->setLogger($app['saved_searches_logger']);
 
-            $user = $app['current_user'];
+            $user = $app['uitid_user'];
             $fixedRepository = new FixedSavedSearchRepository($user);
 
             $repository = new CombinedSavedSearchRepository(

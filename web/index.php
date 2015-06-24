@@ -15,14 +15,25 @@ use CultuurNet\UDB3\Event\Title;
 /** @var Application $app */
 $app = require __DIR__ . '/../bootstrap.php';
 
-$checkAuthenticated = function (Request $request, Application $app) {
-    /** @var \Symfony\Component\HttpFoundation\Session\SessionInterface $session */
-    $session = $app['session'];
+// Enable CORS.
+$app->after($app["cors"]);
 
-    if (!$session->get('culturefeed_user')) {
-        return new Response('Access denied', 403);
-    }
-};
+/**
+ * Firewall.
+ */
+$app['security.firewalls'] = array(
+    'authentication' => array(
+        'pattern' => '^/culturefeed/oauth',
+    ),
+    'user_info' => array (
+        'pattern' => '^/api/1.0/user',
+    ),
+    'secured' => array(
+        'pattern' => '^.*$',
+        'uitid' => true,
+        'users' => $app['uitid_firewall_user_provider'],
+    ),
+);
 
 require __DIR__ . '/../debug.php';
 
@@ -56,9 +67,6 @@ $app['logger.search'] = $app->share(
     }
 );
 
-// Enable CORS.
-$app->after($app["cors"]);
-
 $app->before(
     function (Request $request) {
         if (0 === strpos(
@@ -88,7 +96,7 @@ $app->before(
         $eventCommandBus = $app['event_command_bus'];
 
         /** @var CultureFeed_User $user */
-        $user = $app['current_user'];
+        $user = $app['uitid_user'];
 
         $contextValues = array();
         if ($user) {
@@ -110,94 +118,17 @@ $app->before(
     }
 );
 
-$app->get(
-    'culturefeed/oauth/connect',
-    function (Request $request, Application $app) {
-        /** @var CultuurNet\Auth\ServiceInterface $authService */
-        $authService = $app['auth_service'];
+/**
+ * Register controllers as services.
+ */
+$app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
-        /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator */
-        $urlGenerator = $app['url_generator'];
+$app->mount('culturefeed/oauth', new \CultuurNet\UiTIDProvider\Auth\AuthControllerProvider());
 
-        $callback_url_params = array();
-
-        if ($request->query->get('destination')) {
-            $callback_url_params['destination'] = $request->query->get(
-                'destination'
-            );
-        }
-
-        $callback_url = $urlGenerator->generate(
-            'culturefeed.oauth.authorize',
-            $callback_url_params,
-            $urlGenerator::ABSOLUTE_URL
-        );
-
-        $token = $authService->getRequestToken($callback_url);
-
-        $authorizeUrl = $authService->getAuthorizeUrl($token);
-
-        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
-        $session = $app['session'];
-        $session->set('culturefeed_tmp_token', $token);
-
-        return new RedirectResponse($authorizeUrl);
-    }
-);
-
-$app->get(
-    'culturefeed/oauth/authorize',
-    function (Request $request, Application $app) {
-        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
-        $session = $app['session'];
-
-        /** @var CultuurNet\Auth\ServiceInterface $authService */
-        $authService = $app['auth_service'];
-
-        /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator */
-        $urlGenerator = $app['url_generator'];
-        $query = $request->query;
-
-        /** @var \CultuurNet\Auth\TokenCredentials $token */
-        $token = $session->get('culturefeed_tmp_token');
-
-        if ($query->get('oauth_token') == $token->getToken() && $query->get(
-                'oauth_verifier'
-            )
-        ) {
-            $user = $authService->getAccessToken(
-                $token,
-                $query->get('oauth_verifier')
-            );
-
-            $session->remove('culturefeed_tmp_token');
-
-            $session->set('culturefeed_user', $user);
-        }
-
-        if ($query->get('destination')) {
-            return new RedirectResponse(
-                $query->get('destination')
-            );
-        } else {
-            return new RedirectResponse(
-                $urlGenerator->generate('api/1.0/search')
-            );
-        }
-    }
-)
-    ->bind('culturefeed.oauth.authorize');
-
-$app->get(
-    'logout',
-    function (Request $request, Application $app) {
-        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
-        $session = $app['session'];
-        $session->invalidate();
-
-        return new Response('Logged out');
-    }
-);
+/**
+ * API callbacks for UiTID user data and methods.
+ */
+$app->mount('', new \CultuurNet\UiTIDProvider\User\UserControllerProvider());
 
 $app->get(
     'search',
@@ -241,7 +172,7 @@ $app->get(
 
         return $response;
     }
-)->before($checkAuthenticated);
+);
 
 $app->get(
     'api/1.0/event.jsonld',
@@ -265,7 +196,7 @@ $app->get(
         /** @var Psr\Log\LoggerInterface $logger */
         $logger = $app['logger.search'];
         /** @var CultureFeed_User $user */
-        $user = $app['current_user'];
+        $user = $app['uitid_user'];
 
         /** @var \CultuurNet\UDB3\Search\SearchServiceInterface $searchService */
         $searchService = $app['cached_search_service'];
@@ -293,7 +224,7 @@ $app->get(
 
         return $response;
     }
-)->before($checkAuthenticated)->bind('api/1.0/search');
+)->bind('api/1.0/search');
 
 $app
     ->get(
@@ -370,7 +301,7 @@ $app
             return $response;
         }
     )
-    ->before($checkAuthenticated);
+    ;
 
 $app
     ->post(
@@ -402,7 +333,7 @@ $app
             return $response;
         }
     )
-    ->before($checkAuthenticated);
+    ;
 
 $app
     ->post(
@@ -421,7 +352,7 @@ $app
                 );
 
                 /** @var CultureFeed_User $user */
-                $user = $app['current_user'];
+                $user = $app['uitid_user'];
                 $app['used_labels_memory']->rememberLabelUsed(
                     $user->id,
                     $label
@@ -436,7 +367,7 @@ $app
             return $response;
         }
     )
-    ->before($checkAuthenticated);
+    ;
 
 $app
     ->delete(
@@ -462,33 +393,19 @@ $app
             return $response;
         }
     )
-    ->before($checkAuthenticated);
-
-$app->get(
-    'api/1.0/user',
-    function (Request $request, Application $app) {
-        /** @var CultureFeed_User $user */
-        $user = $app['current_user'];
-
-        $response = JsonLdResponse::create()
-            ->setData($user)
-            ->setPrivate();
-
-        return $response;
-    }
-)->before($checkAuthenticated);
+    ;
 
 $app->get(
     'api/1.0/user/labels',
     function (Request $request, Application $app) {
         /** @var \CultuurNet\UDB3\UsedLabelsMemory\UsedLabelsMemoryServiceInterface $usedLabelsMemoryService */
         $usedLabelsMemoryService = $app['used_labels_memory'];
-        $user = $app['current_user'];
+        $user = $app['uitid_user'];
         $memory = $usedLabelsMemoryService->getMemory($user->id);
 
         return JsonResponse::create($memory);
     }
-)->before($checkAuthenticated);
+);
 
 $app->post(
     'events',
@@ -506,7 +423,7 @@ $app->post(
             ['eventId' => $eventId]
         );
     }
-)->before($checkAuthenticated);
+);
 
 $app->post(
     'events/label',
@@ -523,7 +440,7 @@ $app->post(
             $commandId = $eventLabeller->labelEventsById($eventIds, $label);
 
             /** @var CultureFeed_User $user */
-            $user = $app['current_user'];
+            $user = $app['uitid_user'];
             $app['used_labels_memory']->rememberLabelUsed(
                 $user->id,
                 $label
@@ -537,7 +454,7 @@ $app->post(
 
         return $response;
     }
-)->before($checkAuthenticated);
+);
 
 $app->post('query/label',
     function (Request $request, Application $app) {
@@ -554,7 +471,7 @@ $app->post('query/label',
             $commandId = $eventLabeller->labelQuery($query, $label);
 
             /** @var CultureFeed_User $user */
-            $user = $app['current_user'];
+            $user = $app['uitid_user'];
             $app['used_labels_memory']->rememberLabelUsed(
                 $user->id,
                 $label
