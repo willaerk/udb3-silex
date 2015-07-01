@@ -4,3 +4,5 @@ config.yml
 /log/
 /web/downloads/
 /web/swagger/
+/.puli/
+/web/schema

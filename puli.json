@@ -1,0 +1,444 @@
+{
+    "version": "1.0",
+    "name": "cultuurnet/udb3-silex",
+    "bindings": {
+        "d89f82f4-2051-452d-a9af-de9fa5405c7d": {
+            "query": "/cultuurnet/udb3/public/schema{,/**/*}",
+            "type": "puli/public-resource",
+            "parameters": {
+                "path": "/schema",
+                "server": "localhost"
+            }
+        }
+    },
+    "extra": {
+        "servers": {
+            "localhost": {
+                "installer": "symlink",
+                "document-root": "web"
+            }
+        }
+    },
+    "packages": {
+        "beberlei/assert": {
+            "install-path": "vendor/beberlei/assert",
+            "installer": "composer"
+        },
+        "broadway/broadway": {
+            "install-path": "vendor/broadway/broadway",
+            "installer": "composer"
+        },
+        "broadway/uuid-generator": {
+            "install-path": "vendor/broadway/uuid-generator",
+            "installer": "composer"
+        },
+        "chrisboulton/php-resque": {
+            "install-path": "vendor/chrisboulton/php-resque",
+            "installer": "composer"
+        },
+        "crell/api-problem": {
+            "install-path": "vendor/crell/api-problem",
+            "installer": "composer"
+        },
+        "cultuurnet/auth": {
+            "install-path": "vendor/cultuurnet/auth",
+            "installer": "composer"
+        },
+        "cultuurnet/calendar-summary": {
+            "install-path": "vendor/cultuurnet/calendar-summary",
+            "installer": "composer"
+        },
+        "cultuurnet/cdb": {
+            "install-path": "vendor/cultuurnet/cdb",
+            "installer": "composer"
+        },
+        "cultuurnet/clock": {
+            "install-path": "vendor/cultuurnet/clock",
+            "installer": "composer"
+        },
+        "cultuurnet/culturefeed-php": {
+            "install-path": "vendor/cultuurnet/culturefeed-php",
+            "installer": "composer"
+        },
+        "cultuurnet/deserializer": {
+            "install-path": "vendor/cultuurnet/deserializer",
+            "installer": "composer"
+        },
+        "cultuurnet/entry": {
+            "install-path": "vendor/cultuurnet/entry",
+            "installer": "composer"
+        },
+        "cultuurnet/search": {
+            "install-path": "vendor/cultuurnet/search",
+            "installer": "composer"
+        },
+        "cultuurnet/udb2-domain-events": {
+            "install-path": "vendor/cultuurnet/udb2-domain-events",
+            "installer": "composer"
+        },
+        "cultuurnet/udb3": {
+            "install-path": "vendor/cultuurnet/udb3",
+            "installer": "composer"
+        },
+        "cultuurnet/udb3-doctrine": {
+            "install-path": "vendor/cultuurnet/udb3-doctrine",
+            "installer": "composer"
+        },
+        "cultuurnet/udb3-symfony": {
+            "install-path": "vendor/cultuurnet/udb3-symfony",
+            "installer": "composer"
+        },
+        "danielstjules/stringy": {
+            "install-path": "vendor/danielstjules/stringy",
+            "installer": "composer"
+        },
+        "deralex/yaml-config-service-provider": {
+            "install-path": "vendor/deralex/yaml-config-service-provider",
+            "installer": "composer"
+        },
+        "doctrine/annotations": {
+            "install-path": "vendor/doctrine/annotations",
+            "installer": "composer"
+        },
+        "doctrine/cache": {
+            "install-path": "vendor/doctrine/cache",
+            "installer": "composer"
+        },
+        "doctrine/collections": {
+            "install-path": "vendor/doctrine/collections",
+            "installer": "composer"
+        },
+        "doctrine/common": {
+            "install-path": "vendor/doctrine/common",
+            "installer": "composer"
+        },
+        "doctrine/dbal": {
+            "install-path": "vendor/doctrine/dbal",
+            "installer": "composer"
+        },
+        "doctrine/inflector": {
+            "install-path": "vendor/doctrine/inflector",
+            "installer": "composer"
+        },
+        "doctrine/instantiator": {
+            "install-path": "vendor/doctrine/instantiator",
+            "installer": "composer"
+        },
+        "doctrine/lexer": {
+            "install-path": "vendor/doctrine/lexer",
+            "installer": "composer"
+        },
+        "doctrine/migrations": {
+            "install-path": "vendor/doctrine/migrations",
+            "installer": "composer"
+        },
+        "gridonic/princexml-php": {
+            "install-path": "vendor/gridonic/princexml-php",
+            "installer": "composer"
+        },
+        "guzzle/common": {
+            "install-path": "vendor/guzzle/common/Guzzle/Common",
+            "installer": "composer"
+        },
+        "guzzle/http": {
+            "install-path": "vendor/guzzle/http/Guzzle/Http",
+            "installer": "composer"
+        },
+        "guzzle/log": {
+            "install-path": "vendor/guzzle/log/Guzzle/Log",
+            "installer": "composer"
+        },
+        "guzzle/parser": {
+            "install-path": "vendor/guzzle/parser/Guzzle/Parser",
+            "installer": "composer"
+        },
+        "guzzle/plugin-cookie": {
+            "install-path": "vendor/guzzle/plugin-cookie/Guzzle/Plugin/Cookie",
+            "installer": "composer"
+        },
+        "guzzle/plugin-log": {
+            "install-path": "vendor/guzzle/plugin-log/Guzzle/Plugin/Log",
+            "installer": "composer"
+        },
+        "guzzle/plugin-oauth": {
+            "install-path": "vendor/guzzle/plugin-oauth/Guzzle/Plugin/Oauth",
+            "installer": "composer"
+        },
+        "guzzle/stream": {
+            "install-path": "vendor/guzzle/stream/Guzzle/Stream",
+            "installer": "composer"
+        },
+        "jdesrosiers/silex-cors-provider": {
+            "install-path": "vendor/jdesrosiers/silex-cors-provider",
+            "installer": "composer"
+        },
+        "justinrainbow/json-schema": {
+            "install-path": "vendor/justinrainbow/json-schema",
+            "installer": "composer"
+        },
+        "knplabs/console-service-provider": {
+            "install-path": "vendor/knplabs/console-service-provider",
+            "installer": "composer"
+        },
+        "league/flysystem": {
+            "install-path": "vendor/league/flysystem",
+            "installer": "composer"
+        },
+        "league/flysystem-ziparchive": {
+            "install-path": "vendor/league/flysystem-ziparchive",
+            "installer": "composer"
+        },
+        "league/geotools": {
+            "install-path": "vendor/league/geotools",
+            "installer": "composer"
+        },
+        "marc-mabe/php-enum": {
+            "install-path": "vendor/marc-mabe/php-enum",
+            "installer": "composer"
+        },
+        "mathiasverraes/money": {
+            "install-path": "vendor/mathiasverraes/money",
+            "installer": "composer"
+        },
+        "monolog/monolog": {
+            "install-path": "vendor/monolog/monolog",
+            "installer": "composer"
+        },
+        "nicolopignatelli/valueobjects": {
+            "install-path": "vendor/nicolopignatelli/valueobjects",
+            "installer": "composer"
+        },
+        "padraic/humbug_get_contents": {
+            "install-path": "vendor/padraic/humbug_get_contents",
+            "installer": "composer"
+        },
+        "padraic/phar-updater": {
+            "install-path": "vendor/padraic/phar-updater",
+            "installer": "composer"
+        },
+        "phpdocumentor/reflection-docblock": {
+            "install-path": "vendor/phpdocumentor/reflection-docblock",
+            "installer": "composer"
+        },
+        "phpoffice/phpexcel": {
+            "install-path": "vendor/phpoffice/phpexcel",
+            "installer": "composer"
+        },
+        "phpspec/prophecy": {
+            "install-path": "vendor/phpspec/prophecy",
+            "installer": "composer"
+        },
+        "phpunit/php-code-coverage": {
+            "install-path": "vendor/phpunit/php-code-coverage",
+            "installer": "composer"
+        },
+        "phpunit/php-file-iterator": {
+            "install-path": "vendor/phpunit/php-file-iterator",
+            "installer": "composer"
+        },
+        "phpunit/php-text-template": {
+            "install-path": "vendor/phpunit/php-text-template",
+            "installer": "composer"
+        },
+        "phpunit/php-timer": {
+            "install-path": "vendor/phpunit/php-timer",
+            "installer": "composer"
+        },
+        "phpunit/php-token-stream": {
+            "install-path": "vendor/phpunit/php-token-stream",
+            "installer": "composer"
+        },
+        "phpunit/phpunit": {
+            "install-path": "vendor/phpunit/phpunit",
+            "installer": "composer"
+        },
+        "phpunit/phpunit-mock-objects": {
+            "install-path": "vendor/phpunit/phpunit-mock-objects",
+            "installer": "composer"
+        },
+        "pimple/pimple": {
+            "install-path": "vendor/pimple/pimple",
+            "installer": "composer"
+        },
+        "predis/predis": {
+            "install-path": "vendor/predis/predis",
+            "installer": "composer"
+        },
+        "psr/log": {
+            "install-path": "vendor/psr/log",
+            "installer": "composer"
+        },
+        "puli/cli": {
+            "install-path": "vendor/puli/cli",
+            "installer": "composer"
+        },
+        "puli/composer-plugin": {
+            "install-path": "vendor/puli/composer-plugin",
+            "installer": "composer"
+        },
+        "puli/discovery": {
+            "install-path": "vendor/puli/discovery",
+            "installer": "composer"
+        },
+        "puli/manager": {
+            "install-path": "vendor/puli/manager",
+            "installer": "composer"
+        },
+        "puli/repository": {
+            "install-path": "vendor/puli/repository",
+            "installer": "composer"
+        },
+        "puli/url-generator": {
+            "install-path": "vendor/puli/url-generator",
+            "installer": "composer"
+        },
+        "ramsey/uuid": {
+            "install-path": "vendor/ramsey/uuid",
+            "installer": "composer"
+        },
+        "rase/socket.io-emitter": {
+            "install-path": "vendor/rase/socket.io-emitter",
+            "installer": "composer"
+        },
+        "react/async": {
+            "install-path": "vendor/react/async",
+            "installer": "composer"
+        },
+        "rhumsaa/uuid": {
+            "install-path": "vendor/rhumsaa/uuid",
+            "installer": "composer"
+        },
+        "sebastian/comparator": {
+            "install-path": "vendor/sebastian/comparator",
+            "installer": "composer"
+        },
+        "sebastian/diff": {
+            "install-path": "vendor/sebastian/diff",
+            "installer": "composer"
+        },
+        "sebastian/environment": {
+            "install-path": "vendor/sebastian/environment",
+            "installer": "composer"
+        },
+        "sebastian/exporter": {
+            "install-path": "vendor/sebastian/exporter",
+            "installer": "composer"
+        },
+        "sebastian/global-state": {
+            "install-path": "vendor/sebastian/global-state",
+            "installer": "composer"
+        },
+        "sebastian/recursion-context": {
+            "install-path": "vendor/sebastian/recursion-context",
+            "installer": "composer"
+        },
+        "sebastian/version": {
+            "install-path": "vendor/sebastian/version",
+            "installer": "composer"
+        },
+        "seld/jsonlint": {
+            "install-path": "vendor/seld/jsonlint",
+            "installer": "composer"
+        },
+        "silex/silex": {
+            "install-path": "vendor/silex/silex",
+            "installer": "composer"
+        },
+        "swiftmailer/swiftmailer": {
+            "install-path": "vendor/swiftmailer/swiftmailer",
+            "installer": "composer"
+        },
+        "symfony/console": {
+            "install-path": "vendor/symfony/console",
+            "installer": "composer"
+        },
+        "symfony/debug": {
+            "install-path": "vendor/symfony/debug",
+            "installer": "composer"
+        },
+        "symfony/event-dispatcher": {
+            "install-path": "vendor/symfony/event-dispatcher",
+            "installer": "composer"
+        },
+        "symfony/filesystem": {
+            "install-path": "vendor/symfony/filesystem",
+            "installer": "composer"
+        },
+        "symfony/finder": {
+            "install-path": "vendor/symfony/finder",
+            "installer": "composer"
+        },
+        "symfony/http-foundation": {
+            "install-path": "vendor/symfony/http-foundation/Symfony/Component/HttpFoundation",
+            "installer": "composer"
+        },
+        "symfony/http-kernel": {
+            "install-path": "vendor/symfony/http-kernel",
+            "installer": "composer"
+        },
+        "symfony/process": {
+            "install-path": "vendor/symfony/process",
+            "installer": "composer"
+        },
+        "symfony/routing": {
+            "install-path": "vendor/symfony/routing/Symfony/Component/Routing",
+            "installer": "composer"
+        },
+        "symfony/serializer": {
+            "install-path": "vendor/symfony/serializer",
+            "installer": "composer"
+        },
+        "symfony/yaml": {
+            "install-path": "vendor/symfony/yaml",
+            "installer": "composer"
+        },
+        "twig/twig": {
+            "install-path": "vendor/twig/twig",
+            "installer": "composer"
+        },
+        "videlalvaro/php-amqplib": {
+            "install-path": "vendor/videlalvaro/php-amqplib",
+            "installer": "composer"
+        },
+        "webmozart/assert": {
+            "install-path": "vendor/webmozart/assert",
+            "installer": "composer"
+        },
+        "webmozart/console": {
+            "install-path": "vendor/webmozart/console",
+            "installer": "composer"
+        },
+        "webmozart/expression": {
+            "install-path": "vendor/webmozart/expression",
+            "installer": "composer"
+        },
+        "webmozart/glob": {
+            "install-path": "vendor/webmozart/glob",
+            "installer": "composer"
+        },
+        "webmozart/json": {
+            "install-path": "vendor/webmozart/json",
+            "installer": "composer"
+        },
+        "webmozart/key-value-store": {
+            "install-path": "vendor/webmozart/key-value-store",
+            "installer": "composer"
+        },
+        "webmozart/path-util": {
+            "install-path": "vendor/webmozart/path-util",
+            "installer": "composer"
+        },
+        "willdurand/geocoder": {
+            "install-path": "vendor/willdurand/geocoder",
+            "installer": "composer"
+        },
+        "zendframework/zend-stdlib": {
+            "install-path": "vendor/zendframework/zend-stdlib",
+            "installer": "composer"
+        },
+        "zendframework/zend-validator": {
+            "install-path": "vendor/zendframework/zend-validator",
+            "installer": "composer"
+        }
+    }
+}
