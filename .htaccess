@@ -7,6 +7,12 @@
     Options -MultiViews
 
     RewriteEngine On
+
+    # Serve any existing files from web as if they were in the document root.
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/web/%{REQUEST_URI} -f
+    RewriteRule ^/?(.*)$ /web/$1 [L]
+
     RewriteBase /web/
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
