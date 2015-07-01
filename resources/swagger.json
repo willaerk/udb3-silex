@@ -757,7 +757,7 @@
                         "description": "Original URL of the event and a custom description",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/CreateVariationCommand"
+                            "$ref": "%host%/schema/variations/create-event-variation.json#/definitions/CreateEventVariation"
                         }
                     }
                 ],
@@ -1007,7 +1007,7 @@
                         "description": "",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/EditDescriptionCommand"
+                            "$ref": "%host%/schema/variations/edit-description.json#/definitions/EditEventVariationDescription"
                         }
                     }
                 ],
@@ -1339,8 +1339,7 @@
                     "example": "El Pistolero"
                 },
                 "password": {
-                    "type": "string",
-                    "example": null
+                    "type": "string"
                 },
                 "givenName": {
                     "type": "string",
@@ -1927,49 +1926,6 @@
                 "label",
                 "query"
             ]
-        },
-        "CreateVariationCommand": {
-            "properties": {
-                "owner": {
-                    "description": "The universally unique identifier of the owner of the variation. Currently, only the current user's id is supported.",
-                    "type": "string",
-                    "example": "6f072ba8-c510-40ac-b387-51f582650e27"
-                },
-                "purpose": {
-                    "type": "string",
-                    "description": "A string describing the purpose of the variation.",
-                    "example": "homepage-tips"
-                },
-                "same_as": {
-                    "type": "string",
-                    "description": "URL of the event to create a variation of.",
-                    "example": "https://io.uitdatabank.be/event/0054e567-efc6-4155-b707-9fb4388d9246"
-                },
-                "description": {
-                    "type": "string",
-                    "description": "The alternative description of the event.",
-                    "example": "<p>William Kentridge keert terug naar de Met voor zijn eerste nieuwe productie sinds de première door het gezelschap van The Nose, een opera die voor ophef zorgde bij de opening in 2010. Deze vindingrijke visuele kunstenaar regisseert het schokkende meesterwerk van Berg over een seksueel onweerstaanbare jonge vrouw die met haar losbandige gedrag de ondergang teweegbrengt van al wie zich door haar laat bekoren.</p>"
-                }
-            },
-            "required": [
-                "owner",
-                "purpose",
-                "same_as",
-                "description"
-            ]
-        },
-        "EditDescriptionCommand": {
-            "properties": {
-                "description": {
-                    "type": "string",
-                    "description": "The alternative description of the event.",
-                    "example": "<p>William Kentridge keert terug naar de Met voor zijn eerste nieuwe productie sinds de première door het gezelschap van The Nose, een opera die voor ophef zorgde bij de opening in 2010. Deze vindingrijke visuele kunstenaar regisseert het schokkende meesterwerk van Berg over een seksueel onweerstaanbare jonge vrouw die met haar losbandige gedrag de ondergang teweegbrengt van al wie zich door haar laat bekoren.</p>"
-                }
-            },
-            "required": [
-                "description"
-            ],
-            "additionalProperties": false
         },
         "VariationsList": {
             "properties": {

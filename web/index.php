@@ -641,4 +641,13 @@ $app->mount('variations', new \CultuurNet\UDB3\Silex\VariationsControllerProvide
 
 $app->register(new \CultuurNet\UDB3\Silex\ErrorHandlerProvider());
 
+$app->get(
+    'swagger.json',
+    function (Request $request, Application $app) {
+        $json = file_get_contents(__DIR__ . '/../resources/swagger.json');
+        $json = str_replace('%host%', $app['config']['url'], $json);
+        return (new JsonResponse())->setContent($json);
+    }
+);
+
 $app->run();
