@@ -848,33 +848,61 @@
                             "$ref": "#/definitions/Event"
                         },
                         "examples": {
-                            "@id": "http://culudb-silex.dev:8080/variations/04C47992-B01E-4EE4-96ED-289F22638324",
-                            "name": {
-                                "nl": "Nederlands",
-                                "de": "Deutch",
-                                "en": "English",
-                                "fr": "Français"
-                            },
-                            "description": {
-                                "nl": "Alternatieve beschrijving in het Nederlands",
-                                "de": "Deutch",
-                                "en": "English",
-                                "fr": "Français"
-                            },
-                            "available": "2015-05-07T12:02:53+00:00",
-                            "image": "http://media.uitdatabank.be/20150416/153cfa0f-0d22-451e-bfd1-490b7c4ef109.jpg",
-                            "labels": [
-                                "tagged"
-                            ],
-                            "calendarSummary": "Every first day of the month",
-                            "location": {
-                                "description": "Or not to be.",
-                                "name": "This is the place to be",
-                                "address": {
-                                    "addressCountry": "BE",
-                                    "addressLocality": "Leuven",
-                                    "postalCode": 3000,
-                                    "streetAddress": "Sluisstraat 79"
+                            "application/ld+json": {
+                                "@id": "http://culudb-silex.dev:8080/variations/04C47992-B01E-4EE4-96ED-289F22638324",
+                                "name": {
+                                    "nl": "Nederlands",
+                                    "de": "Deutch",
+                                    "en": "English",
+                                    "fr": "Français"
+                                },
+                                "description": {
+                                    "nl": "Alternatieve beschrijving in het Nederlands",
+                                    "de": "Deutch",
+                                    "en": "English",
+                                    "fr": "Français"
+                                },
+                                "available": "2015-05-07T12:02:53+00:00",
+                                "image": "http://media.uitdatabank.be/20150416/153cfa0f-0d22-451e-bfd1-490b7c4ef109.jpg",
+                                "labels": [
+                                    "tagged"
+                                ],
+                                "calendarSummary": "Every first day of the month",
+                                "location": {
+                                    "description": "Or not to be.",
+                                    "name": "This is the place to be",
+                                    "address": {
+                                        "addressCountry": "BE",
+                                        "addressLocality": "Leuven",
+                                        "postalCode": 3000,
+                                        "streetAddress": "Sluisstraat 79"
+                                    },
+                                    "bookingInfo": {
+                                        "priceCurrency": "EUR",
+                                        "description": "No need to pay anything",
+                                        "name": "Free",
+                                        "price": 0
+                                    },
+                                    "terms": [
+                                        {
+                                            "label": "Cycling",
+                                            "domain": "activities",
+                                            "id": "10.0.0.1"
+                                        }
+                                    ]
+                                },
+                                "organizer": {
+                                    "name": "STUK",
+                                    "address": {
+                                        "addressCountry": "BE",
+                                        "addressLocality": "Leuven",
+                                        "postalCode": 3000,
+                                        "streetAddress": "Sluisstraat 79"
+                                    },
+                                    "email": "info@stuk.be",
+                                    "phone": [
+                                        "016 320 300"
+                                    ]
                                 },
                                 "bookingInfo": {
                                     "priceCurrency": "EUR",
@@ -888,50 +916,24 @@
                                         "domain": "activities",
                                         "id": "10.0.0.1"
                                     }
+                                ],
+                                "creator": "evenementen@stad.diksmuide.be",
+                                "created": "2015-05-07T12:02:53+00:00",
+                                "modified": "2015-05-07T12:02:53+00:00",
+                                "publisher": "Invoerders Algemeen ",
+                                "endDate": "2015-05-07T12:02:53+00:00",
+                                "startDate": "2015-05-07T12:02:53+00:00",
+                                "calendarType": "permanent",
+                                "typicalAgeRange": "+18",
+                                "performer": [
+                                    {
+                                        "name": "Sindicato Sonico"
+                                    }
+                                ],
+                                "sameAs": [
+                                    "http://culudb-silex.dev:8080/event/0823f57e-a6bd-450a-b4f5-8459b4b11043"
                                 ]
-                            },
-                            "organizer": {
-                                "name": "STUK",
-                                "address": {
-                                    "addressCountry": "BE",
-                                    "addressLocality": "Leuven",
-                                    "postalCode": 3000,
-                                    "streetAddress": "Sluisstraat 79"
-                                },
-                                "email": "info@stuk.be",
-                                "phone": [
-                                    "016 320 300"
-                                ]
-                            },
-                            "bookingInfo": {
-                                "priceCurrency": "EUR",
-                                "description": "No need to pay anything",
-                                "name": "Free",
-                                "price": 0
-                            },
-                            "terms": [
-                                {
-                                    "label": "Cycling",
-                                    "domain": "activities",
-                                    "id": "10.0.0.1"
-                                }
-                            ],
-                            "creator": "evenementen@stad.diksmuide.be",
-                            "created": "2015-05-07T12:02:53+00:00",
-                            "modified": "2015-05-07T12:02:53+00:00",
-                            "publisher": "Invoerders Algemeen ",
-                            "endDate": "2015-05-07T12:02:53+00:00",
-                            "startDate": "2015-05-07T12:02:53+00:00",
-                            "calendarType": "permanent",
-                            "typicalAgeRange": "+18",
-                            "performer": [
-                                {
-                                    "name": "Sindicato Sonico"
-                                }
-                            ],
-                            "sameAs": [
-                                "http://culudb-silex.dev:8080/event/0823f57e-a6bd-450a-b4f5-8459b4b11043"
-                            ]
+                            }
                         }
                     },
                     "410": {
