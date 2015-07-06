@@ -96,10 +96,21 @@ $app['search_api_2'] = $app->share(
             $app['config']['uitid']['base_url'] .
             $app['config']['uitid']['apis']['search'];
 
-        return new SearchAPI2(
+        $search = new SearchAPI2(
             $searchApiUrl,
             $app['uitid_consumer_credentials']
         );
+
+        $handler = new \Monolog\Handler\StreamHandler(
+            __DIR__ . '/log/search.log'
+        );
+        $handler->setLevel(\Monolog\Logger::DEBUG);
+        $logger = new \Monolog\Logger('search', [$handler]);
+        $adapter = new \Guzzle\Log\PsrLogAdapter($logger);
+        $logPlugin = new \Guzzle\Plugin\Log\LogPlugin($adapter);
+        $search->getHttpClientFactory()->addSubscriber($logPlugin);
+
+        return $search;
     }
 );
 
