@@ -20,5 +20,20 @@ Resque_Event::listen(
         \CultuurNet\UDB3\CommandHandling\QueueJob::setCommandBus(
             $app['event_command_bus']
         );
+
+        /** @var \Symfony\Component\Stopwatch\Stopwatch $stopwatch */
+        $stopwatch = $app['stopwatch'];
+
+        Resque_Event::listen(
+            'afterPerform',
+            function () use ($stopwatch) {
+                foreach ($stopwatch->getSections() as $section) {
+                    foreach ($section->getEvents() as $name => $event) {
+                        print str_pad($name, 90, '.', STR_PAD_RIGHT) . ' ' . str_pad(number_format($event->getDuration(), 0), 8, ' ', STR_PAD_LEFT) . PHP_EOL;
+                    }
+                }
+            }
+        );
     }
 );
+

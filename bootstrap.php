@@ -96,10 +96,19 @@ $app['search_api_2'] = $app->share(
             $app['config']['uitid']['base_url'] .
             $app['config']['uitid']['apis']['search'];
 
-        return new SearchAPI2(
+        $search = new SearchAPI2(
             $searchApiUrl,
             $app['uitid_consumer_credentials']
         );
+
+        $search->addSubscriber(
+            new \CultuurNet\UDB3\EventHandling\StopWatch\StopWatchPlugin(
+                'search http traffic',
+                $app['stopwatch']
+            )
+        );
+
+        return $search;
     }
 );
 
@@ -389,11 +398,22 @@ $app['event_history_cache'] = $app->share(
     }
 );
 
+$app['stopwatch'] = $app->share(
+    function () {
+        return new \Symfony\Component\Stopwatch\Stopwatch();
+    }
+);
+
 $app['event_bus'] = $app->share(
     function ($app) {
-        $eventBus = new \CultuurNet\UDB3\SimpleEventBus();
+        $innerEventBus = new \CultuurNet\UDB3\SimpleEventBus();
 
-        $eventBus->beforeFirstPublication(function (\Broadway\EventHandling\EventBusInterface $eventBus) use ($app) {
+        $eventBus = new \CultuurNet\UDB3\EventHandling\StopWatch\StopWatchDecoratedEventBus(
+            $innerEventBus,
+            $app['stopwatch']
+        );
+
+        $innerEventBus->beforeFirstPublication(function (\Broadway\EventHandling\EventBusInterface $innerEventBus) use ($app, $eventBus) {
             // Subscribe projector for event relations read model as the first one.
             $eventBus->subscribe(
                 $app['relations_projector']
@@ -457,12 +477,43 @@ $app['udb2_entry_api_improved_factory'] = $app->share(
             $uitidConfig['base_url'] .
             $uitidConfig['apis']['entry'];
 
-        return new \CultuurNet\UDB3\UDB2\EntryAPIImprovedFactory(
+        $factory = new \CultuurNet\UDB3\UDB2\SimpleEntryAPIImprovedFactory(
             new \CultuurNet\UDB3\UDB2\Consumer(
                 $baseUrl,
                 $app['uitid_consumer_credentials']
             )
         );
+
+        /** @var \Symfony\Component\EventDispatcher\EventSubscriberInterface $plugins */
+        $plugins = [
+            new \CultuurNet\UDB3\EventHandling\StopWatch\StopWatchPlugin(
+                'entry_api http traffic',
+                $app['stopwatch']
+            )
+        ];
+
+        // Print request and response for debugging purposes. Only on CLI.
+        if (PHP_SAPI === 'cli') {
+            // @todo Move parts of this initialization to a separate class,
+            // in order to make it reusable.
+            $adapter = new \Guzzle\Log\ClosureLogAdapter(
+                function ($message, $priority, $extras) {
+                    print $message;
+                }
+            );
+
+            $format = "\n\n# Request:\n{request}\n\n# Response:\n{response}\n\n# Errors: {curl_code} {curl_error}\n\n";
+            $plugins[] = new \Guzzle\Plugin\Log\LogPlugin($adapter, $format);
+        }
+
+        foreach ($plugins as $plugin) {
+            $factory = new \CultuurNet\UDB3\UDB2\PluginDecoratedEntryAPIImprovedFactory(
+                $factory,
+                $plugin
+            );
+        }
+
+        return $factory;
     }
 );
 
